@@ -298,6 +298,17 @@ button:hover{
     font-size:12px;
 }
 
+@keyframes pop{
+
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.15);
+    }
+
+}
 </style>
 </head>
 
@@ -355,6 +366,8 @@ button:hover{
     </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
 
@@ -468,8 +481,23 @@ function cekNilai(){
 
         if(siswa.nilai >= 75){
 
-            status.innerHTML = "Tuntas ✅";
+            status.innerHTML = `
+            <div style="
+                font-size:32px;
+                font-weight:700;
+                animation:pop 0.8s infinite alternate;
+            ">
+                🎉 TUNTAS 🎉
+            </div>
+            `;
+
             status.className = "status tuntas";
+
+            confetti({
+                particleCount: 300,
+                spread: 180,
+                origin: { y: 0.6 }
+            });
 
         }else{
 
@@ -489,6 +517,5 @@ function cekNilai(){
 }
 
 </script>
-
 </body>
 </html>
