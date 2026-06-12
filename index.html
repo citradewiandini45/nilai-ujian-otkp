@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil Nilai Ujian Produktif OTKP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#4338ca,#7e22ce,#2563eb,#9333ea);
+    background-size:400% 400%;
+    animation:bgGerak 12s ease infinite;
+    padding:20px;
+}
+
+@keyframes bgGerak{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* BUBBLE */
+
+.bubble{
+    position:absolute;
+    bottom:-100px;
+    background:rgba(255,255,255,0.12);
+    border-radius:50%;
+    animation:naik linear infinite;
+}
+
+.bubble:nth-child(1){
+    width:80px;
+    height:80px;
+    left:10%;
+    animation-duration:15s;
+}
+
+.bubble:nth-child(2){
+    width:40px;
+    height:40px;
+    left:25%;
+    animation-duration:11s;
+}
+
+.bubble:nth-child(3){
+    width:100px;
+    height:100px;
+    left:40%;
+    animation-duration:18s;
+}
+
+.bubble:nth-child(4){
+    width:60px;
+    height:60px;
+    left:65%;
+    animation-duration:13s;
+}
+
+.bubble:nth-child(5){
+    width:90px;
+    height:90px;
+    left:82%;
+    animation-duration:17s;
+}
+
+@keyframes naik{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:0;
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-120vh) rotate(360deg);
+        opacity:0;
+    }
+}
+
+.container{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:460px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:30px;
+    padding:35px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    animation:muncul 1s ease;
+}
+
+@keyframes muncul{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(0.9);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.logo{
+    font-size:75px;
+    text-align:center;
+    animation:lompat 2s infinite;
+}
+
+@keyframes lompat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+}
+
+h1{
+    text-align:center;
+    color:white;
+    margin-top:10px;
+    margin-bottom:8px;
+    font-size:30px;
+}
+
+.sub{
+    text-align:center;
+    color:#e5e7eb;
+    font-size:14px;
+    margin-bottom:30px;
+    line-height:1.7;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    color:white;
+    margin-bottom:8px;
+    font-weight:500;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:rgba(255,255,255,0.2);
+    color:white;
+    font-size:15px;
+    transition:0.3s;
+}
+
+input::placeholder{
+    color:#e5e7eb;
+}
+
+input:focus{
+    outline:none;
+    background:rgba(255,255,255,0.3);
+    transform:scale(1.02);
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:15px;
+    background:white;
+    color:#4f46e5;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.hasil{
+    margin-top:25px;
+    background:rgba(255,255,255,0.15);
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    display:none;
+    animation:hasilMuncul 0.7s ease;
+}
+
+@keyframes hasilMuncul{
+    from{
+        opacity:0;
+        transform:scale(0.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.nama{
+    font-size:25px;
+    color:white;
+    font-weight:700;
+}
+
+.kelas{
+    color:#e5e7eb;
+    margin-top:8px;
+    margin-bottom:25px;
+}
+
+.nilai{
+    font-size:85px;
+    font-weight:700;
+    color:white;
+    text-shadow:0 0 20px rgba(255,255,255,0.5);
+    animation:glow 1.5s infinite alternate;
+}
+
+@keyframes glow{
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.08);
+    }
+}
+
+.status{
+    margin-top:20px;
+    padding:14px;
+    border-radius:15px;
+    font-weight:700;
+    font-size:16px;
+}
+
+.tuntas{
+    background:#22c55e;
+    color:white;
+}
+
+.tidak{
+    background:#ef4444;
+    color:white;
+}
+
+.error{
+    display:none;
+    margin-top:20px;
+    background:#ef4444;
+    color:white;
+    padding:14px;
+    border-radius:15px;
+    text-align:center;
+    animation:goyang 0.4s;
+}
+
+@keyframes goyang{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    50%{transform:translateX(8px);}
+    75%{transform:translateX(-8px);}
+    100%{transform:translateX(0);}
+}
+
+.footer{
+    text-align:center;
+    margin-top:25px;
+    color:#e5e7eb;
+    font-size:12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+<div class="bubble"></div>
+
+<div class="container">
+
+    <div class="logo">🎓</div>
+
+    <h1>Hasil Nilai Ujian</h1>
+
+    <div class="sub">
+        Produktif OTKP Kelas 10 BM<br>
+        Masukkan Nama dan Password (NIS)
+    </div>
+
+    <div class="input-box">
+        <label>Nama Siswa</label>
+        <input type="text" id="namaInput" placeholder="Masukkan nama lengkap">
+    </div>
+
+    <div class="input-box">
+        <label>Password / NIS</label>
+        <input type="password" id="nisInput" placeholder="Masukkan NIS">
+    </div>
+
+    <button onclick="cekNilai()">Lihat Nilai</button>
+
+    <div class="error" id="error">
+        Nama atau NIS tidak sesuai
+    </div>
+
+    <div class="hasil" id="hasil">
+
+        <div class="nama" id="nama"></div>
+
+        <div class="kelas">
+            Kelas 10 BM
+        </div>
+
+        <div class="nilai" id="nilai"></div>
+
+        <div class="status" id="status"></div>
+
+    </div>
+
+    <div class="footer">
+        © 2026 Sistem Informasi Nilai
+    </div>
+
+</div>
+
+<script>
+
+const dataSiswa = [
+
+{
+nama:"Aisyah Fatiha Juhaimi",
+nis:"252610013",
+nilai:92
+},
+
+{
+nama:"Kaeyla Destia Az Zahra",
+nis:"252610014",
+nilai:92
+},
+
+{
+nama:"Khalimatu Sadiyah",
+nis:"252610015",
+nilai:90
+},
+
+{
+nama:"Miftahus Sa'adah",
+nis:"252610016",
+nilai:98
+},
+
+{
+nama:"Nadia Riza Zaelani",
+nis:"252610017",
+nilai:90
+},
+
+{
+nama:"Naylul Husna",
+nis:"252610018",
+nilai:86
+},
+
+{
+nama:"Raissya Salsabila",
+nis:"252610019",
+nilai:94
+},
+
+{
+nama:"Rosaline Clayrine Rumsarwir",
+nis:"252610021",
+nilai:90
+},
+
+{
+nama:"Sapa Nadia Putri",
+nis:"252610022",
+nilai:97
+},
+
+{
+nama:"Siska Nurwulan",
+nis:"252610023",
+nilai:97
+},
+
+{
+nama:"Tsania Kisya Saputri",
+nis:"252610027",
+nilai:91
+},
+
+{
+nama:"Zul Shiva Nurahim",
+nis:"252610028",
+nilai:97
+}
+
+];
+
+function cekNilai(){
+
+    const namaInput = document.getElementById("namaInput").value.trim().toLowerCase();
+    const nisInput = document.getElementById("nisInput").value.trim();
+
+    const hasil = document.getElementById("hasil");
+    const error = document.getElementById("error");
+
+    const siswa = dataSiswa.find(s =>
+        s.nama.toLowerCase() === namaInput &&
+        s.nis === nisInput
+    );
+
+    if(siswa){
+
+        document.getElementById("nama").innerText = siswa.nama;
+
+        let angka = 0;
+
+        const interval = setInterval(() => {
+
+            if(angka >= siswa.nilai){
+                clearInterval(interval);
+            }else{
+                angka++;
+                document.getElementById("nilai").innerText = angka;
+            }
+
+        },20);
+
+        const status = document.getElementById("status");
+
+        if(siswa.nilai >= 75){
+
+            status.innerHTML = "Tuntas ✅";
+            status.className = "status tuntas";
+
+        }else{
+
+            status.innerHTML = "Belum Tuntas ❌";
+            status.className = "status tidak";
+        }
+
+        hasil.style.display = "block";
+        error.style.display = "none";
+
+    }else{
+
+        hasil.style.display = "none";
+        error.style.display = "block";
+    }
+
+}
+
+</script>
+
+</body>
+</html>
