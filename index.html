@@ -349,6 +349,10 @@ button:hover{
     <div class="input-box">
         <label>NIS</label>
         <input type="text" id="nisInput" placeholder="Masukkan NIS">
+<button type="button" onclick="lihatNIS()" style="margin-top:10px;background:#facc15;color:black;">
+👁 Lihat NIS
+</button>
+
     </div>
 
     <button onclick="cekNilai()">Lihat Nilai</button>
@@ -1053,6 +1057,26 @@ function tampilkanStatus(nilai){
         </a>
 
         `;
+
+    }
+
+}
+
+function lihatNIS(){
+
+    const namaInput = document.getElementById("namaInput").value.trim().toLowerCase();
+
+    const siswa = dataSiswa.find(s =>
+        s.nama.toLowerCase() === namaInput
+    );
+
+    if(siswa){
+
+        alert("NIS milik " + siswa.nama + " adalah:\n\n" + siswa.nis);
+
+    }else{
+
+        alert("Nama tidak ditemukan");
 
     }
 
