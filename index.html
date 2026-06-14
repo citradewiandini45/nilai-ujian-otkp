@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hasil Nilai Ujian Produktif OTKP</title>
+<title>Hasil Nilai PSAT Sejarah Kelas 10</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 
@@ -18,116 +20,69 @@
 
 body{
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:auto;
+    overflow-y:auto;
     background:linear-gradient(-45deg,#4338ca,#7e22ce,#2563eb,#9333ea);
     background-size:400% 400%;
     animation:bgGerak 12s ease infinite;
-    padding:20px;
+    padding:30px 15px;
+    display:flex;
+    justify-content:center;
 }
 
 @keyframes bgGerak{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
 
-/* BUBBLE */
-
-.bubble{
-    position:absolute;
-    bottom:-100px;
-    background:rgba(255,255,255,0.12);
-    border-radius:50%;
-    animation:naik linear infinite;
-}
-
-.bubble:nth-child(1){
-    width:80px;
-    height:80px;
-    left:10%;
-    animation-duration:15s;
-}
-
-.bubble:nth-child(2){
-    width:40px;
-    height:40px;
-    left:25%;
-    animation-duration:11s;
-}
-
-.bubble:nth-child(3){
-    width:100px;
-    height:100px;
-    left:40%;
-    animation-duration:18s;
-}
-
-.bubble:nth-child(4){
-    width:60px;
-    height:60px;
-    left:65%;
-    animation-duration:13s;
-}
-
-.bubble:nth-child(5){
-    width:90px;
-    height:90px;
-    left:82%;
-    animation-duration:17s;
-}
-
-@keyframes naik{
     0%{
-        transform:translateY(0) rotate(0deg);
-        opacity:0;
+        background-position:0% 50%;
     }
 
-    10%{
-        opacity:1;
+    50%{
+        background-position:100% 50%;
     }
 
     100%{
-        transform:translateY(-120vh) rotate(360deg);
-        opacity:0;
+        background-position:0% 50%;
     }
+
 }
 
 .container{
-    position:relative;
-    z-index:2;
+
     width:100%;
-    max-width:460px;
+    max-width:500px;
     background:rgba(255,255,255,0.15);
     backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,0.2);
     border-radius:30px;
     padding:35px;
     box-shadow:0 15px 40px rgba(0,0,0,0.25);
+    border:1px solid rgba(255,255,255,0.2);
     animation:muncul 1s ease;
+
 }
 
 @keyframes muncul{
+
     from{
         opacity:0;
-        transform:translateY(40px) scale(0.9);
+        transform:translateY(40px);
     }
 
     to{
         opacity:1;
-        transform:translateY(0) scale(1);
+        transform:translateY(0);
     }
+
 }
 
 .logo{
-    font-size:75px;
+
+    font-size:80px;
     text-align:center;
     animation:lompat 2s infinite;
+
 }
 
 @keyframes lompat{
+
     0%,100%{
         transform:translateY(0);
     }
@@ -135,36 +90,46 @@ body{
     50%{
         transform:translateY(-10px);
     }
+
 }
 
 h1{
+
     text-align:center;
     color:white;
     margin-top:10px;
-    margin-bottom:8px;
     font-size:30px;
+
 }
 
 .sub{
+
     text-align:center;
     color:#e5e7eb;
-    font-size:14px;
-    margin-bottom:30px;
+    margin-top:10px;
+    margin-bottom:35px;
     line-height:1.7;
+    font-size:14px;
+
 }
 
 .input-box{
-    margin-bottom:18px;
+
+    margin-bottom:20px;
+
 }
 
 label{
+
     display:block;
-    color:white;
     margin-bottom:8px;
+    color:white;
     font-weight:500;
+
 }
 
 input{
+
     width:100%;
     padding:15px;
     border:none;
@@ -173,19 +138,25 @@ input{
     color:white;
     font-size:15px;
     transition:0.3s;
+
 }
 
 input::placeholder{
+
     color:#e5e7eb;
+
 }
 
 input:focus{
+
     outline:none;
     background:rgba(255,255,255,0.3);
     transform:scale(1.02);
+
 }
 
 button{
+
     width:100%;
     padding:15px;
     border:none;
@@ -196,106 +167,121 @@ button{
     font-weight:700;
     cursor:pointer;
     transition:0.3s;
+
 }
 
 button:hover{
+
     transform:scale(1.03);
+
+}
+
+.error{
+
+    display:none;
+    margin-top:20px;
+    background:#ef4444;
+    color:white;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+    animation:goyang 0.4s;
+
+}
+
+@keyframes goyang{
+
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-8px);}
+    50%{transform:translateX(8px);}
+    75%{transform:translateX(-8px);}
+    100%{transform:translateX(0);}
+
 }
 
 .hasil{
-    margin-top:25px;
-    background:rgba(255,255,255,0.15);
-    border-radius:25px;
-    padding:25px;
-    text-align:center;
+
     display:none;
+    margin-top:30px;
+    background:rgba(255,255,255,0.12);
+    border-radius:25px;
+    padding:30px;
+    text-align:center;
     animation:hasilMuncul 0.7s ease;
+
 }
 
 @keyframes hasilMuncul{
+
     from{
         opacity:0;
-        transform:scale(0.7);
+        transform:scale(0.8);
     }
 
     to{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
 .nama{
-    font-size:25px;
-    color:white;
+
+    font-size:28px;
     font-weight:700;
+    color:white;
+
 }
 
 .kelas{
-    color:#e5e7eb;
+
     margin-top:8px;
-    margin-bottom:25px;
+    color:#e5e7eb;
+    font-size:15px;
+
+}
+
+.mapel{
+
+    margin-top:5px;
+    color:#e5e7eb;
+    font-size:14px;
+
 }
 
 .nilai{
-    font-size:85px;
+
+    margin-top:30px;
+    font-size:95px;
     font-weight:700;
     color:white;
-    text-shadow:0 0 20px rgba(255,255,255,0.5);
-    animation:glow 1.5s infinite alternate;
-}
+    text-shadow:0 0 25px rgba(255,255,255,0.6);
 
-@keyframes glow{
-    from{
-        transform:scale(1);
-    }
-
-    to{
-        transform:scale(1.08);
-    }
 }
 
 .status{
+
     margin-top:20px;
-    padding:14px;
-    border-radius:15px;
+    padding:15px;
+    border-radius:18px;
+    font-size:20px;
     font-weight:700;
-    font-size:16px;
+    animation:pop 0.8s infinite alternate;
+
 }
 
 .tuntas{
+
     background:#22c55e;
     color:white;
+
 }
 
 .tidak{
+
     background:#ef4444;
     color:white;
-}
 
-.error{
-    display:none;
-    margin-top:20px;
-    background:#ef4444;
-    color:white;
-    padding:14px;
-    border-radius:15px;
-    text-align:center;
-    animation:goyang 0.4s;
-}
-
-@keyframes goyang{
-    0%{transform:translateX(0);}
-    25%{transform:translateX(-8px);}
-    50%{transform:translateX(8px);}
-    75%{transform:translateX(-8px);}
-    100%{transform:translateX(0);}
-}
-
-.footer{
-    text-align:center;
-    margin-top:25px;
-    color:#e5e7eb;
-    font-size:12px;
 }
 
 @keyframes pop{
@@ -305,144 +291,670 @@ button:hover{
     }
 
     to{
-        transform:scale(1.15);
+        transform:scale(1.08);
     }
 
 }
+
+.remedial-btn{
+
+    display:inline-block;
+    margin-top:25px;
+    padding:15px 25px;
+    background:white;
+    color:#7e22ce;
+    border-radius:15px;
+    text-decoration:none;
+    font-weight:700;
+    transition:0.3s;
+
+}
+
+.remedial-btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+.footer{
+
+    margin-top:30px;
+    text-align:center;
+    color:#e5e7eb;
+    font-size:12px;
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-<div class="bubble"></div>
-
 <div class="container">
 
-    <div class="logo">🎓</div>
+    <div class="logo">📚</div>
 
-    <h1>Hasil Nilai Ujian</h1>
+    <h1>Nilai PSAT Sejarah</h1>
 
     <div class="sub">
-        Produktif OTKP Kelas 10 BM<br>
-        Masukkan Nama dan Password (NIS)
+        Kelas 10 TKRO • OTKP • AKL • TKJ<br>
+        Masukkan Nama dan NIS untuk melihat hasil nilai
     </div>
 
     <div class="input-box">
-        <label>Nama Siswa</label>
+        <label>Nama Lengkap</label>
         <input type="text" id="namaInput" placeholder="Masukkan nama lengkap">
     </div>
 
     <div class="input-box">
-        <label>Password / NIS</label>
-        <input type="password" id="nisInput" placeholder="Masukkan NIS">
+        <label>NIS</label>
+        <input type="text" id="nisInput" placeholder="Masukkan NIS">
     </div>
 
     <button onclick="cekNilai()">Lihat Nilai</button>
 
     <div class="error" id="error">
-        Nama atau NIS tidak sesuai
+        Nama atau NIS tidak ditemukan
     </div>
 
     <div class="hasil" id="hasil">
 
         <div class="nama" id="nama"></div>
 
-        <div class="kelas">
-            Kelas 10 BM
+        <div class="kelas" id="kelas"></div>
+
+        <div class="mapel">
+            Mata Pelajaran Sejarah
         </div>
 
-        <div class="nilai" id="nilai"></div>
+        <div class="nilai" id="nilai">0</div>
 
-        <div class="status" id="status"></div>
+        <div id="statusContainer"></div>
 
     </div>
 
     <div class="footer">
-        © 2026 Sistem Informasi Nilai
+        © 2026 Sistem Informasi Nilai PSAT
     </div>
 
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
 
 const dataSiswa = [
 
 {
+nama:"Abi Al Paris",
+nis:"252610047",
+kelas:"TKRO",
+nilai:60
+},
+
+{
+nama:"Afdhal Rizqi Mubarok",
+nis:"252610048",
+kelas:"TKRO",
+nilai:0
+},
+
+{
+nama:"Alvin Wibowo",
+nis:"252610050",
+kelas:"TKRO",
+nilai:87
+},
+
+{
+nama:"Alvino Akbar",
+nis:"252610051",
+kelas:"TKRO",
+nilai:95
+},
+
+{
+nama:"Andika Harta Pratama",
+nis:"252610052",
+kelas:"TKRO",
+nilai:0
+},
+
+{
+nama:"Andre Juliawan",
+nis:"252610053",
+kelas:"TKRO",
+nilai:86
+},
+
+{
+nama:"Ardiansyah",
+nis:"252610054",
+kelas:"TKRO",
+nilai:70
+},
+
+{
+nama:"Azka Hasby Firdaus",
+nis:"252610055",
+kelas:"TKRO",
+nilai:86
+},
+
+{
+nama:"Daffa Hafliza Hafiz",
+nis:"252610056",
+kelas:"TKRO",
+nilai:80
+},
+
+{
+nama:"Daffa Raditya Abbe",
+nis:"252610057",
+kelas:"TKRO",
+nilai:0
+},
+
+{
+nama:"Dede Irawan",
+nis:"252610058",
+kelas:"TKRO",
+nilai:60
+},
+
+{
+nama:"Fahriza Herlambang",
+nis:"252610059",
+kelas:"TKRO",
+nilai:90
+},
+
+{
+nama:"Hadi Abdullah",
+nis:"252610061",
+kelas:"TKRO",
+nilai:90
+},
+
+{
+nama:"Ilham Ramadhani",
+nis:"252610062",
+kelas:"TKRO",
+nilai:88
+},
+
+{
+nama:"Irfan Irawan",
+nis:"252610063",
+kelas:"TKRO",
+nilai:0
+},
+
+{
+nama:"M. Daffa Al Ghifary",
+nis:"252610094",
+kelas:"TKRO",
+nilai:50
+},
+
+{
+nama:"M. Denis Mahendra",
+nis:"252610065",
+kelas:"TKRO",
+nilai:0
+},
+
+{
+nama:"M. Iqram At Thoriq",
+nis:"252610039",
+kelas:"TKRO",
+nilai:82
+},
+
+{
+nama:"M. Repan",
+nis:"252610067",
+kelas:"TKRO",
+nilai:92
+},
+
+{
+nama:"M. Ridho",
+nis:"252610041",
+kelas:"TKRO",
+nilai:75
+},
+
+{
+nama:"Maulana Fahran",
+nis:"252610068",
+kelas:"TKRO",
+nilai:78
+},
+
+{
+nama:"Muhamad Aripin",
+nis:"252610071",
+kelas:"TKRO",
+nilai:76
+},
+
+{
+nama:"Muhamad Ilham",
+nis:"252610072",
+kelas:"TKRO",
+nilai:70
+},
+
+{
+nama:"Muhamad Okta Firmansyah",
+nis:"252610073",
+kelas:"TKRO",
+nilai:76
+},
+
+{
+nama:"Muhamad Ramdani",
+nis:"252610066",
+kelas:"TKRO",
+nilai:50
+},
+
+{
+nama:"Muhammad Abidin Supriyanto",
+nis:"252610074",
+kelas:"TKRO",
+nilai:30
+},
+
+{
+nama:"Muhammad Afiz Rizki",
+nis:"252610064",
+kelas:"TKRO",
+nilai:76
+},
+
+{
+nama:"Muhammad Najril Ilham",
+nis:"252610076",
+kelas:"TKRO",
+nilai:80
+},
+
+{
+nama:"Muhammad Wildan",
+nis:"252610077",
+kelas:"TKRO",
+nilai:60
+},
+
+{
+nama:"Nauval Isdianto",
+nis:"252610078",
+kelas:"TKRO",
+nilai:82
+},
+
+{
+nama:"Raihan Al Khairiy",
+nis:"252610081",
+kelas:"TKRO",
+nilai:82
+},
+
+{
+nama:"Rangga",
+nis:"252610082",
+kelas:"TKRO",
+nilai:40
+},
+
+{
+nama:"Rendy Alpiano",
+nis:"252610084",
+kelas:"TKRO",
+nilai:76
+},
+
+{
+nama:"Rifa Al Farizi",
+nis:"252610095",
+kelas:"TKRO",
+nilai:60
+},
+
+{
+nama:"Setyo Cahyo Nugroho",
+nis:"252610086",
+kelas:"TKRO",
+nilai:82
+},
+
+{
+nama:"Sigit Santoso",
+nis:"252610087",
+kelas:"TKRO",
+nilai:60
+},
+
+{
+nama:"Teguh Herlambang",
+nis:"252610088",
+kelas:"TKRO",
+nilai:85
+},
+
+{
+nama:"Wisnu Putra Nugraha",
+nis:"252610090",
+kelas:"TKRO",
+nilai:87
+},
+
+{
+nama:"Zaki",
+nis:"252610091",
+kelas:"TKRO",
+nilai:87
+},
+
+{
+nama:"Zaky Fadillah Surya",
+nis:"252610092",
+kelas:"TKRO",
+nilai:75
+},
+
+{
+nama:"Davin Baihakki",
+nis:"252610098",
+kelas:"TKRO",
+nilai:85
+},
+
+{
+nama:"Muhammad Alkadavi",
+nis:"252610100",
+kelas:"TKRO",
+nilai:57
+},
+
+{
 nama:"Aisyah Fatiha Juhaimi",
 nis:"252610013",
-nilai:92
+kelas:"OTKP",
+nilai:87
 },
 
 {
 nama:"Kaeyla Destia Az Zahra",
 nis:"252610014",
-nilai:92
+kelas:"OTKP",
+nilai:89
 },
 
 {
 nama:"Khalimatu Sadiyah",
 nis:"252610015",
+kelas:"OTKP",
 nilai:90
 },
 
 {
 nama:"Miftahus Sa'adah",
 nis:"252610016",
-nilai:98
+kelas:"OTKP",
+nilai:89
 },
 
 {
 nama:"Nadia Riza Zaelani",
 nis:"252610017",
-nilai:90
+kelas:"OTKP",
+nilai:86
 },
 
 {
 nama:"Naylul Husna",
 nis:"252610018",
-nilai:86
+kelas:"OTKP",
+nilai:87
 },
 
 {
 nama:"Raissya Salsabila",
 nis:"252610019",
-nilai:94
+kelas:"OTKP",
+nilai:86
 },
 
 {
 nama:"Rosaline Clayrine Rumsarwir",
 nis:"252610021",
-nilai:90
+kelas:"OTKP",
+nilai:95
 },
 
 {
 nama:"Sapa Nadia Putri",
 nis:"252610022",
-nilai:97
+kelas:"OTKP",
+nilai:100
 },
 
 {
 nama:"Siska Nurwulan",
 nis:"252610023",
-nilai:97
+kelas:"OTKP",
+nilai:88
 },
 
 {
 nama:"Tsania Kisya Saputri",
 nis:"252610027",
-nilai:91
+kelas:"OTKP",
+nilai:85
 },
 
 {
 nama:"Zul Shiva Nurahim",
 nis:"252610028",
-nilai:97
+kelas:"OTKP",
+nilai:89
+},
+
+{
+nama:"Adinda Komalasari",
+nis:"252610001",
+kelas:"AKL",
+nilai:75
+},
+
+{
+nama:"Ananta Risti Khairufischa",
+nis:"252610002",
+kelas:"AKL",
+nilai:65
+},
+
+{
+nama:"Davina Varalidia Zahrani",
+nis:"252610004",
+kelas:"AKL",
+nilai:60
+},
+
+{
+nama:"Karunia Septianawati",
+nis:"252610093",
+kelas:"AKL",
+nilai:85
+},
+
+{
+nama:"Monika",
+nis:"252610007",
+kelas:"AKL",
+nilai:80
+},
+
+{
+nama:"Rahmania Az Zahra",
+nis:"252610008",
+kelas:"AKL",
+nilai:75
+},
+
+{
+nama:"Raishya Luthfya Amanda",
+nis:"252610009",
+kelas:"AKL",
+nilai:78
+},
+
+{
+nama:"Salsa Sackia Maulidina",
+nis:"252610010",
+kelas:"AKL",
+nilai:95
+},
+
+{
+nama:"Zahra Syafira Ramadhani",
+nis:"252610012",
+kelas:"AKL",
+nilai:89
+},
+
+{
+nama:"Ahmad Rendi",
+nis:"252610029",
+kelas:"TKJ",
+nilai:78
+},
+
+{
+nama:"Andri Firmansyah",
+nis:"252610030",
+kelas:"TKJ",
+nilai:0
+},
+
+{
+nama:"Angga Muhammad Fauzi",
+nis:"252610031",
+kelas:"TKJ",
+nilai:0
+},
+
+{
+nama:"Anggi Raisya Mega",
+nis:"252610032",
+kelas:"TKJ",
+nilai:85
+},
+
+{
+nama:"Ayu Wandira",
+nis:"252610003",
+kelas:"TKJ",
+nilai:75
+},
+
+{
+nama:"Bunga Safitri",
+nis:"252610034",
+kelas:"TKJ",
+nilai:89
+},
+
+{
+nama:"Fadlan Buchori",
+nis:"252610035",
+kelas:"TKJ",
+nilai:0
+},
+
+{
+nama:"Fallah Fauzan",
+nis:"252610060",
+kelas:"TKJ",
+nilai:85
+},
+
+{
+nama:"Fazri Choerudin",
+nis:"252610036",
+kelas:"TKJ",
+nilai:78
+},
+
+{
+nama:"Felisha Ajidiah Putri",
+nis:"252610037",
+kelas:"TKJ",
+nilai:85
+},
+
+{
+nama:"M. Raffi Alfarizki",
+nis:"252610040",
+kelas:"TKJ",
+nilai:50
+},
+
+{
+nama:"Marsha Dessira",
+nis:"252610096",
+kelas:"TKJ",
+nilai:76
+},
+
+{
+nama:"Muhamad Rafi",
+nis:"252610099",
+kelas:"TKJ",
+nilai:90
+},
+
+{
+nama:"Muhammad Ilhamsyah Putra",
+nis:"252610043",
+kelas:"TKJ",
+nilai:83
+},
+
+{
+nama:"Raja Andiansyah",
+nis:"252610044",
+kelas:"TKJ",
+nilai:20
+},
+
+{
+nama:"Riska Anggi Ramayanti",
+nis:"252610020",
+kelas:"TKJ",
+nilai:35
+},
+
+{
+nama:"Saydina Alief Muhammad",
+nis:"252610045",
+kelas:"TKJ",
+nilai:88
+},
+
+{
+nama:"Syarifah Alya Keyrani J",
+nis:"252610025",
+kelas:"TKJ",
+nilai:90
+},
+
+{
+nama:"Yudistira Al Yasin",
+nis:"252610046",
+kelas:"TKJ",
+nilai:70
 }
 
 ];
@@ -450,72 +962,103 @@ nilai:97
 function cekNilai(){
 
     const namaInput = document.getElementById("namaInput").value.trim().toLowerCase();
-    const nisInput = document.getElementById("nisInput").value.trim();
 
-    const hasil = document.getElementById("hasil");
-    const error = document.getElementById("error");
+    const nisInput = document.getElementById("nisInput").value.trim();
 
     const siswa = dataSiswa.find(s =>
         s.nama.toLowerCase() === namaInput &&
         s.nis === nisInput
     );
 
+    const hasil = document.getElementById("hasil");
+
+    const error = document.getElementById("error");
+
     if(siswa){
+
+        error.style.display = "none";
+
+        hasil.style.display = "block";
 
         document.getElementById("nama").innerText = siswa.nama;
 
+        document.getElementById("kelas").innerText = "Kelas " + siswa.kelas;
+
         let angka = 0;
+
+        const nilaiEl = document.getElementById("nilai");
 
         const interval = setInterval(() => {
 
             if(angka >= siswa.nilai){
+
                 clearInterval(interval);
+
+                tampilkanStatus(siswa.nilai);
+
             }else{
+
                 angka++;
-                document.getElementById("nilai").innerText = angka;
+
+                nilaiEl.innerText = angka;
+
             }
 
         },20);
 
-        const status = document.getElementById("status");
-
-        if(siswa.nilai >= 75){
-
-            status.innerHTML = `
-            <div style="
-                font-size:32px;
-                font-weight:700;
-                animation:pop 0.8s infinite alternate;
-            ">
-                🎉 TUNTAS 🎉
-            </div>
-            `;
-
-            status.className = "status tuntas";
-
-            confetti({
-                particleCount: 300,
-                spread: 180,
-                origin: { y: 0.6 }
-            });
-
-        }else{
-
-            status.innerHTML = "Belum Tuntas ❌";
-            status.className = "status tidak";
-        }
-
-        hasil.style.display = "block";
-        error.style.display = "none";
-
     }else{
 
         hasil.style.display = "none";
+
         error.style.display = "block";
+
+    }
+
+}
+
+function tampilkanStatus(nilai){
+
+    const statusContainer = document.getElementById("statusContainer");
+
+    if(nilai >= 75){
+
+        statusContainer.innerHTML = `
+
+        <div class="status tuntas">
+            🎉 Selamat, Nilai Anda Tuntas 🎉
+        </div>
+
+        `;
+
+        confetti({
+            particleCount:300,
+            spread:180,
+            origin:{ y:0.6 }
+        });
+
+    }else{
+
+        statusContainer.innerHTML = `
+
+        <div class="status tidak">
+            ❌ Nilai Anda Belum Tuntas
+        </div>
+
+        <a class="remedial-btn"
+        href="https://docs.google.com/forms/d/e/1FAIpQLSdhPGjMBRORtpxd0sX96YskLxdQ_UQ5bArNGwAU9qGG1WdLzg/viewform?usp=header"
+        target="_blank">
+
+        📄 Kerjakan Remedial
+
+        </a>
+
+        `;
+
     }
 
 }
 
 </script>
+
 </body>
 </html>
